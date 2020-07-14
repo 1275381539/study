@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 需求： 需要两个请求都成功才能进行下一步操作
+        Promise.all([
+            new Promise((resolve,reject)=>{
+                $.ajax({
+                    url:'url1',
+                    success:function(data){
+                        resolve(data)
+                    }
+                })
+            }),
+            new Promise((resolve,reject)=>{
+                $.ajax({
+                    url:'url2',
+                    success:function(data){
+                        resolve(data)
+                    }
+                })
+            })
+        ]).then(results=>{
+            results[0] // 第一次请求的返回结果
+            results[1] // 第二次请求的放回结果
+        })
+    </script>
+</body>
+</html>

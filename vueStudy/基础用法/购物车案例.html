@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+
+        <div v-if='list.length'>
+            <div>
+                <span>书籍名称</span>
+                <span>出版日期</span>
+                <span>价钱</span>
+                <span>购买数量</span>
+                <span>操作</span>
+            </div>
+            <div v-for='(item,index) in list'>
+                <span>{{item.id}}</span>
+                <span>{{item.name}}</span>
+                <span>{{item.date}}</span>
+                <span>{{item.price | showPrice}}</span>
+                <span><button @click='rec(index)' :disabled="item.num <= 1">-</button>{{item.num}}<button @click='add(index)'>+</button></span>
+                <span><button @click='remove(index)'>移除</button></span>
+            </div>
+            <div>总价：{{prices | showPrice}}</div>
+        </div>
+        <div v-else>购物车为空</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                isList:false,
+                list:[
+                    {
+                        id:1,
+                        name:'《西游记》',
+                        date:'2006-9',
+                        price:85.00,
+                        num:1,
+                    },
+                    {
+                        id:2,
+                        name:'《红楼梦》',
+                        date:'2006-9',
+                        price:23.00,
+                        num:1,
+                    },
+                    {
+                        id:3,
+                        name:'《水浒传》',
+                        date:'2006-9',
+                        price:45.00,
+                        num:1,
+                    },
+                    {
+                        id:4,
+                        name:'《金瓶梅》',
+                        date:'2006-9',
+                        price:29.00,
+                        num:1,
+                    }
+                ],
+            },
+            computed:{
+                prices(){
+                    let nums = 0;
+                    for(let i =0 ;i<this.list.length;i++){
+                        nums +=  this.list[i].price * this.list[i].num
+                    }
+                    return nums
+                }
+            },
+            methods:{
+                add(i){
+                    this.list[i].num++
+                },
+                rec(i){
+                    this.list[i].num--
+                },
+                remove(i){
+                    this.list.splice(i,1)
+                    if(this.list.length == 0) {
+                        this.isList = !this.isList
+                    }
+                }
+            },
+            filters:{ // 过滤器
+                showPrice(price){
+                    return '￥' + price.toFixed(2)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn :cmovies='movies' :cmesssage = 'messsage'></cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <ul>
+                <li v-for='i in cmovies'>{{i}}</li>
+            </ul>
+           <h2>{{cmesssage}}</h2> 
+        </div>
+    </template>
+
+    <script src="../vue.js"></script>
+    <script>
+        // 父传子
+        const cpn = {
+            template:'#cpn',
+           //  props:['cmovies','cmesssage'], 数组写法
+           props:{ // 对象写法
+            // 1. 类型限制
+            // 可以写的类型有   String  Number  Boolean  Array  Object  Date  Function  Symbol
+            // cmovies:Array,
+            // 2. 提供默认值
+            cmesssage:{
+                type:String,
+                default:'aaaaa', // 默认值
+               //  required:true // 必传
+            },
+            // 类型是对象或者数组时，默认值必须是一个函数
+            cmovies:{
+                type:Array,
+                default(){
+                    return []
+                }
+            }
+           },
+            data(){
+                return {
+
+                }
+            }
+        }
+
+        const app = new Vue({
+            el:'#app',
+            data:{
+                messsage:'你好啊',
+                movies:['问道','大话西游','梦幻西游','DNF','神武']
+            },
+            components:{
+                cpn
+            }
+        })
+    </script>
+</body>
+</html>

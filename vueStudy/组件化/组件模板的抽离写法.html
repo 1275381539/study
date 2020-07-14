@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+      <cpn></cpn>
+    </div>
+    <!-- 第一种写法 script标签  注意：type="text/x-template"-->
+    <!-- <script type="text/x-template" id="cpn">
+        <div>
+            <h2>我是标题</h2>
+            <p>我是内容</p>
+            <p>我也是内容</p>
+        </div>
+    </script> -->
+
+    <!-- 第二种写法，template标签 -->
+    <template id="cpn">
+        <div>
+            <h2>{{title}}</h2>
+            <p>我是内容</p>
+            <p>我也是内容</p>
+        </div>
+    </template>       
+
+    <script src="../vue.js"></script>
+    <script>
+        // 2. 注册组件 语法糖写法  这种写法，不需要写步骤1里面的创建构造器
+        Vue.component('cpn',{
+            template:'#cpn',
+            data(){ // 组件不能访问vue实例中的数据，数据可以写在data中，注意：data必须是函数，且必须有返回一个对象，可以在返回对象中定义数据
+                return{
+                    title:'aabbbccc'
+                }
+            }
+        })
+
+
+        const app = new Vue({
+            el:'#app',
+            data:{
+                messsage:'你好啊',
+            },
+        })
+    </script>
+</body>
+</html>

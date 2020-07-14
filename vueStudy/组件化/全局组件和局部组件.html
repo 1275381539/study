@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 3. 使用组件 -->
+        <my-cpn></my-cpn>
+
+        <!-- 未注册组件，会报错 -->
+        <!-- <cpn></cpn> -->
+    </div>
+
+    <div id="app2">
+        <!-- 3. 使用组件 -->
+        <my-cpn></my-cpn>
+        <cpn></cpn>
+    </div>
+
+    <script src="../vue.js"></script>
+    <script>
+        // 1. 创建组件构造器
+        const cpnC =  Vue.extend({
+            template:`
+            <div>
+                <h2>我是标题</h2>
+                <p>我是内容</p>
+                <p>我也是内容</p>
+            </div>
+                `
+        })
+
+        // 2. 注册组件 (全局组件，可以在多个vue的实例下使用)
+        // Vue.component(组件的标签名，组件构造器)
+
+        Vue.component('my-cpn',cpnC)
+
+        // 2. 注册组件 语法糖写法  这种写法，不需要写步骤1里面的创建构造器
+        Vue.component('my-cpn',{
+            template:`
+            <div>
+                <h2>我是标题</h2>
+                <p>我是内容</p>
+                <p>我也是内容</p>
+            </div>
+                `
+        })
+
+
+        const app = new Vue({
+            el:'#app',
+            data:{
+                messsage:'你好啊',
+            } 
+        })
+
+        const app2 = new Vue({
+            el:'#app2',
+            data:{
+                messsage:'你好啊',
+            },
+            components:{ // 在实例中注册，就是局部组件
+                // cpn:cpnC,
+                // 语法糖写法
+                cpn:{
+                    template:`
+                    <div>
+                        <h2>我是标题</h2>
+                        <p>我是内容</p>
+                        <p>我也是内容</p>
+                    </div>
+                        `
+                }
+            } 
+        })
+    </script>
+</body>
+</html>

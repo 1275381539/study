@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=`, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for='item in arr'>{{item}}</li>
+        </ul>
+        <button @click='but'>按钮</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                arr:['a','b','c','d']
+            },
+            methods:{
+                but:function(n){
+                    // 1. push  数组末尾添加元素
+                    // this.arr.push('e','f','g')
+                    // 2. pop 删除数组中最后一个元素
+                    // this.arr.pop()
+                    // 3. shift 删除数组中第一个元素
+                    // this.arr.shift()
+                    // 4. unshift  数组末尾添加元素
+                    // this.arr.unshift('e','f','g')
+                    // 5. splice 删除元素/插入元素/替换元素
+                    // 删除
+                    // this.arr.splice(1,1)
+                    // 插入
+                    // this.arr.splice(1,0,'ssss')
+                    // 替换
+                    // this.arr.splice(1,2,'ssss','cccc')
+                    // 6. vue.set() vue附带的方法
+                    // Vue.set(this.arr,1,'aaaa')
+
+                    //     不是响应式，数组会更改，页面不会更新
+                    // this.arr[0]='ssss'
+                }
+            },
+        })
+    </script>
+</body>
+</html>

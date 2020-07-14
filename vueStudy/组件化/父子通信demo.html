@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn :number1='num1' 
+             :number2='num2'
+             @change1 = 'inputChange1'
+             @change2 = 'inputChange2'/>
+    </div>
+
+    <template id="cpn">
+        <div>
+           <h2>props:{{number1}}</h2>
+           <h2>data:{{dNumber1}}</h2>
+           <input type="text"  :value='dNumber1' @input='numInput1'>
+           <h2>props:{{number2}}</h2>
+           <h2>data:{{dNumber2}}</h2>
+           <input type="text"  :value='dNumber2' @input='numInput2'>
+        </div>
+    </template>
+
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:'#app',
+            data:{
+                num1:1,
+                num2:2
+            },
+            methods:{
+                inputChange1(val){
+                    this.num1 =parseFloat(val) 
+                },
+                inputChange2(val){
+                    this.num2 = parseFloat(val) 
+                }
+            },
+            components:{
+                cpn:{
+                    template:'#cpn',
+                    props:{
+                        number1:Number,
+                        number2:Number
+                    },
+                    data(){
+                        return {
+                            dNumber1:this.number1,
+                            dNumber2:this.number2
+                        }
+                    },
+                    methods:{
+                        numInput1(enevt){
+                            this.dNumber1 = enevt.target.value
+                            this.$emit('change1',this.dNumber1)
+
+                            this.dNumber2 = enevt.target.value *100
+                            this.$emit('change2',this.dNumber2)
+                        },   
+                        numInput2(enevt){
+                            this.dNumber2 = enevt.target.value
+                            this.$emit('change2',this.dNumber2)
+
+                            this.dNumber1 = enevt.target.value / 100
+                            this.$emit('change1',this.dNumber1)
+                        },                  
+                    }
+                },
+            }
+        })
+    </script>
+</body>
+</html>

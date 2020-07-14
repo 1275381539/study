@@ -1,0 +1,48 @@
+<!-- 子访问父 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn></cpn>
+    </div>
+
+    <template id="cpn">
+        <div>
+            <div>我是子组件</div>
+            <button @click = 'btn'> 按钮</button>
+        </div>
+  
+    </template>
+
+    <script src="../vue.js"></script>
+    <script>
+        
+        const app = new Vue({
+            el:'#app',
+            data:{
+                mes:'哈哈哈哈哈'
+            },
+            methods:{
+
+            },
+            components:{
+               cpn:{
+                   template:'#cpn',
+                   methods:{
+                       btn(){
+                        console.log(this.$parent) // 访问上一级
+                        console.log(this.$root) // 访问跟目录
+                       }
+                   }
+               }
+            }
+        })
+    </script>
+</body>
+</html>

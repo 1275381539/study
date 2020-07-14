@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <cpn></cpn>
+
+        <!-- 拿到子组件的数据 data是自定义的，可以随便替换 -->
+        <cpn>
+            <template slot-scope = "slot">
+                <span v-for='item in slot.data'>{{item}}--</span>
+            </template>
+        </cpn>
+
+        <cpn>
+            <template slot-scope = "slot">
+                <span v-for='item in slot.data'>{{item}}**</span>
+            </template>
+        </cpn>
+    </div>
+    <template id="cpn">
+        <div>
+            <slot :data='arrs'>
+                <ul>
+                    <li v-for='item in arrs'>{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+  
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        
+        const app = new Vue({
+            el:'#app',
+            data:{
+                mes:'哈哈哈哈哈'
+            },
+            methods:{
+
+            },
+            components:{
+               cpn:{
+                   template:'#cpn',
+                   data(){
+                       return {
+                           arrs:['html','css','js','vue','uni-app']
+                       }
+                   }
+               }
+            }
+        })
+    </script>
+</body>
+</html>
